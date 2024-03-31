@@ -17,17 +17,6 @@ const LoginPage = () => {
         <form className="">
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
             <Input
-              classNames={{
-                label: "!text-white !font-semibold !text-xl",
-              }}
-              labelPlacement={"outside"}
-              type="text"
-              label="Name"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
-            <Input
               classNames={{ label: "!text-white !font-semibold !text-xl" }}
               labelPlacement={"outside"}
               type="email"

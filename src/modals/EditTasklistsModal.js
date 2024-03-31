@@ -7,7 +7,7 @@ import {
   ModalFooter,
   Button,
 } from "@nextui-org/react";
-import { Input } from "@nextui-org/react";
+import { Input, Select, SelectItem } from "@nextui-org/react";
 
 const EditTasklistsModal = ({ isOpen, onOpenChange }) => {
   return (
@@ -40,13 +40,24 @@ const EditTasklistsModal = ({ isOpen, onOpenChange }) => {
                       placeholder="Enter Title"
                     />
                   </div>
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6">
                     <Input
                       labelPlacement={"outside"}
                       type="text"
                       label="description"
                       placeholder="Enter description"
                     />
+                  </div>
+                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                    <Select
+                      labelPlacement={"outside"}
+                      label="Task Status"
+                      placeholder="Select the status"
+                      className="w-full"
+                    >
+                      <SelectItem value={"pending"}>Pending</SelectItem>
+                      <SelectItem value={"pending"}>complete</SelectItem>
+                    </Select>
                   </div>
                 </form>
               </ModalBody>

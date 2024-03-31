@@ -39,6 +39,18 @@ const Header = () => {
               TaskLists
             </MenuItem>
             <MenuItem
+              active={path === "/pending-task"}
+              component={<Link href="/pending-task" />}
+            >
+              Pending Tasks
+            </MenuItem>
+            <MenuItem
+              active={path === "/complete-task"}
+              component={<Link href="/complete-task" />}
+            >
+              Complete Tasks
+            </MenuItem>
+            <MenuItem
               active={path === "/settings"}
               component={<Link href="/settings" />}
             >
