@@ -1,36 +1,66 @@
+import { Input } from "@nextui-org/react";
+import Link from "next/link";
+
 const LoginPage = () => {
   return (
     <div
-      className="m-0 p-0 font-sans flex justify-center items-center min-h-screen bg-gradient-to-br  from-white to-gray-300 bg-no-repeat  bg-cover"
+      className="-ml-10 p-0 font-sans flex justify-center items-center min-h-screen bg-gradient-to-br  from-white to-gray-300 bg-no-repeat  bg-cover overflow-hidden"
       style={{
         backgroundImage:
-          "url('https://media.geeksforgeeks.org/img-practice/prod/courses/543/Web/Content/GATE-DS-AI_1705410035.webp')",
+          "url('https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmxhY2slMjBsb2dpbnxlbnwwfHwwfHx8MA%3D%3D')",
       }}
     >
-      <div className="w-3/4 max-w-400">
-        <form className="bg-opacity-10 bg-white backdrop-blur-md rounded-lg p-20">
-          <h2>Login</h2>
-          <div className="input-group">
-            <label for="username">Username</label>
-            <input
+      <div className="max-w-2xl w-full bg-opacity-20 bg-white backdrop-blur-md rounded-lg px-10 py-10">
+        <h2 className="text-3xl font-bold text-white  capitalize text-center mb-6">
+          Login
+        </h2>
+        <form className="">
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
+            <Input
+              classNames={{
+                label: "!text-white !font-semibold !text-xl",
+              }}
+              labelPlacement={"outside"}
               type="text"
-              placeholder="Email or Name"
-              name="username"
-              required
+              label="Name"
+              placeholder="Enter your name"
             />
           </div>
-          <div className="input-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              id="password"
-              name="password"
-              required
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
+            <Input
+              classNames={{ label: "!text-white !font-semibold !text-xl" }}
+              labelPlacement={"outside"}
+              type="email"
+              label="Email"
+              placeholder="Enter your email"
             />
           </div>
-          <button type="submit">Login</button>
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
+            <Input
+              classNames={{ label: "!text-white !font-semibold !text-xl" }}
+              labelPlacement={"outside"}
+              type="email"
+              label="Password"
+              placeholder="Enter your password"
+            />
+          </div>
+          <div className="text-xl  flex justify-center items-center">
+            <button
+              className="bg-purple-700 text-white px-7 py-2.5 font-medium rounded-lg"
+              type="submit"
+            >
+              Login
+            </button>
+          </div>
         </form>
+        <div>
+          <p className="text-lg text-white text-center pt-2">
+            Don&apos;t have an account?{" "}
+            <Link className="font-bold text-xl" href={"/signup"}>
+              Sign up now
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
