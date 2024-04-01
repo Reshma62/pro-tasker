@@ -3,11 +3,13 @@
 import axiosPublic from "@/Hooks/axiosPublic";
 import { Input } from "@nextui-org/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const axios = axiosPublic();
+  const { push } = useRouter();
   const {
     register,
     handleSubmit,
@@ -24,6 +26,7 @@ const SignUpPage = () => {
     if (signUpData.status === "success") {
       toast.success("registation successfull");
       reset();
+      push("/login");
     } else {
       toast.error(signUpData.error);
     }
@@ -78,7 +81,7 @@ const SignUpPage = () => {
             <Input
               classNames={{ label: "!text-white !font-semibold !text-xl" }}
               labelPlacement={"outside"}
-              type="email"
+              type="password"
               label="Password"
               placeholder="Enter your password"
               {...register("password", { required: true })}

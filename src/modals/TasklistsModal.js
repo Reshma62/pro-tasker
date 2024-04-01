@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -8,10 +8,31 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
+import axiosPublic from "@/Hooks/axiosPublic";
+import toast from "react-hot-toast";
 
-const TasklistsModal = ({ isOpen, onOpenChange }) => {
-  const handleAddTask = () => {
-    console.log("first");
+const TasklistsModal = ({ isOpen, onOpenChange, setAllTasks }) => {
+  const [title, setTitle] = useState("");
+  const [description, setdescription] = useState("");
+  const axios = axiosPublic();
+  const handleAddTask = async (onClose) => {
+    const tasks = {
+      title,
+      description,
+    };
+    const { data: addTask } = await axios.post(`/task/addTasks`, tasks);
+
+    if (addTask.status === "success") {
+      toast.success("Task added successfull");
+      setAllTasks((allTasks) => {
+        let temp = [...allTasks];
+        temp.push({ ...tasks, addTask });
+        return temp;
+      });
+      onClose();
+    } else {
+      toast.error(addTask.error);
+    }
   };
   return (
     <>
@@ -42,6 +63,7 @@ const TasklistsModal = ({ isOpen, onOpenChange }) => {
                       type="text"
                       label="Title"
                       placeholder="Enter Title"
+                      onChange={({ target }) => setTitle(target.value)}
                     />
                   </div>
                   <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
@@ -50,6 +72,7 @@ const TasklistsModal = ({ isOpen, onOpenChange }) => {
                       type="text"
                       label="description"
                       placeholder="Enter description"
+                      onChange={({ target }) => setdescription(target.value)}
                     />
                   </div>
                 </form>
@@ -58,7 +81,7 @@ const TasklistsModal = ({ isOpen, onOpenChange }) => {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={handleAddTask}>
+                <Button color="primary" onPress={() => handleAddTask(onClose)}>
                   Add task
                 </Button>
               </ModalFooter>
