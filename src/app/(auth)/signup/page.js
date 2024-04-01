@@ -1,7 +1,34 @@
+"use client";
+
+import axiosPublic from "@/Hooks/axiosPublic";
 import { Input } from "@nextui-org/react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
+  const axios = axiosPublic();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    const user = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+    const { data: signUpData } = await axios.post(`/auth/signup`, user);
+    if (signUpData.status === "success") {
+      toast.success("registation successfull");
+      reset();
+    } else {
+      toast.error(signUpData.error);
+    }
+  };
+
   return (
     <div
       className="-ml-10 p-0 font-sans flex justify-center items-center min-h-screen bg-gradient-to-br  from-white to-gray-300 bg-no-repeat  bg-cover overflow-hidden"
@@ -14,7 +41,7 @@ const SignUpPage = () => {
         <h2 className="text-3xl font-bold text-white  capitalize text-center mb-6">
           Sign up
         </h2>
-        <form className="">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
             <Input
               classNames={{
@@ -24,8 +51,14 @@ const SignUpPage = () => {
               type="text"
               label="Name"
               placeholder="Enter your name"
+              {...register("name", { required: true })}
             />
           </div>
+          {errors.name && (
+            <span className="text-red-500 text-xs font-semibold">
+              Name is required
+            </span>
+          )}
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
             <Input
               classNames={{ label: "!text-white !font-semibold !text-xl" }}
@@ -33,8 +66,14 @@ const SignUpPage = () => {
               type="email"
               label="Email"
               placeholder="Enter your email"
+              {...register("email", { required: true })}
             />
           </div>
+          {errors.email && (
+            <span className="text-red-500 text-xs font-semibold">
+              Email is required
+            </span>
+          )}
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-6 text-white">
             <Input
               classNames={{ label: "!text-white !font-semibold !text-xl" }}
@@ -42,8 +81,14 @@ const SignUpPage = () => {
               type="email"
               label="Password"
               placeholder="Enter your password"
+              {...register("password", { required: true })}
             />
           </div>
+          {errors.password && (
+            <span className="text-red-500 text-xs font-semibold ">
+              Password is required
+            </span>
+          )}
           <div className="text-xl  flex justify-center items-center">
             <button
               className="bg-purple-700 text-white px-7 py-2.5 font-medium rounded-lg"
