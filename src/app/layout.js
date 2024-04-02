@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import { UiProvider } from "@/Providers/UiProvider";
 import TanstackQueryProvider from "@/Providers/TanstackQueryProvider";
+import AuthContextProviders from "@/Context/AuthContextProviders";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -18,14 +19,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <TanstackQueryProvider>
-          <UiProvider>
-            <div className="flex gap-10">
-              <Header />
-              <main className="flex-1">{children}</main>
-            </div>
-          </UiProvider>
-        </TanstackQueryProvider>
+        <AuthContextProviders>
+          <TanstackQueryProvider>
+            <UiProvider>
+              <div className="flex md:flex-row flex-col gap-10 overflow-hidden">
+                <Header />
+                <main className="flex-1">{children}</main>
+              </div>
+            </UiProvider>
+          </TanstackQueryProvider>
+        </AuthContextProviders>
       </body>
     </html>
   );

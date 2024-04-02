@@ -20,7 +20,7 @@ const PendingTasksPage = () => {
     return <Loading />;
   }
   return (
-    <section className="mt-16">
+    <section className="py-10 lg:pr-20 px-5 mt-16">
       {allTasks?.data?.count === 0 ? (
         <p>no task add</p>
       ) : (

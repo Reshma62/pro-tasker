@@ -52,7 +52,7 @@ const TaskLists = () => {
   }
   return (
     <>
-      <section className="py-10 pr-20">
+      <section className="py-10 lg:pr-20 px-5">
         <div className="flex justify-end ">
           <button
             onClick={() => onOpen()}

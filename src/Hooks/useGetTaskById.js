@@ -13,6 +13,7 @@ const useGetTaskById = (id) => {
     queryFn: async () => {
       const url = `/task/getTasksById/${id}`;
       const { data } = await axios.get(url);
+
       return data.data;
     },
   });

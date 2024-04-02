@@ -34,7 +34,7 @@ const SignUpPage = () => {
 
   return (
     <div
-      className="-ml-10 p-0 font-sans flex justify-center items-center min-h-screen bg-gradient-to-br  from-white to-gray-300 bg-no-repeat  bg-cover overflow-hidden"
+      className="lg:-ml-10 px-10 lg:p-0 font-sans flex justify-center items-center min-h-screen bg-gradient-to-br  from-white to-gray-300 bg-no-repeat  bg-cover overflow-hidden"
       style={{
         backgroundImage:
           "url('https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmxhY2slMjBsb2dpbnxlbnwwfHwwfHx8MA%3D%3D')",
