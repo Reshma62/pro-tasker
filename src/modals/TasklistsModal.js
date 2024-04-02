@@ -11,11 +11,21 @@ import { Input } from "@nextui-org/react";
 import axiosPublic from "@/Hooks/axiosPublic";
 import toast from "react-hot-toast";
 
-const TasklistsModal = ({ isOpen, onOpenChange, setAllTasks }) => {
+const TasklistsModal = ({ isOpen, onOpenChange, refetch }) => {
   const [title, setTitle] = useState("");
+  const [titleError, setTitleError] = useState("");
   const [description, setdescription] = useState("");
+  const [descriptionError, setdescriptionError] = useState("");
   const axios = axiosPublic();
   const handleAddTask = async (onClose) => {
+    if (!title) {
+      return setTitleError("Please enter a title for the tasklist.");
+    }
+    if (!description) {
+      return setdescriptionError(
+        "Please enter a description for the tasklist."
+      );
+    }
     const tasks = {
       title,
       description,
@@ -24,11 +34,7 @@ const TasklistsModal = ({ isOpen, onOpenChange, setAllTasks }) => {
 
     if (addTask.status === "success") {
       toast.success("Task added successfull");
-      setAllTasks((allTasks) => {
-        let temp = [...allTasks];
-        temp.push({ ...tasks, addTask });
-        return temp;
-      });
+      refetch();
       onClose();
     } else {
       toast.error(addTask.error);
@@ -38,6 +44,7 @@ const TasklistsModal = ({ isOpen, onOpenChange, setAllTasks }) => {
     <>
       {/* <Button onPress={onOpen}>Open Modal</Button> */}
       <Modal
+        size="4xl"
         backdrop="opaque"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -63,18 +70,34 @@ const TasklistsModal = ({ isOpen, onOpenChange, setAllTasks }) => {
                       type="text"
                       label="Title"
                       placeholder="Enter Title"
-                      onChange={({ target }) => setTitle(target.value)}
+                      onChange={({ target }) => {
+                        setTitle(target.value);
+                        setTitleError("");
+                      }}
                     />
                   </div>
+                  {titleError && (
+                    <span className="text-red-500 text-xs font-semibold">
+                      {titleError}
+                    </span>
+                  )}
                   <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
                     <Input
                       labelPlacement={"outside"}
                       type="text"
                       label="description"
                       placeholder="Enter description"
-                      onChange={({ target }) => setdescription(target.value)}
+                      onChange={({ target }) => {
+                        setdescription(target.value);
+                        setdescriptionError("");
+                      }}
                     />
                   </div>
+                  {descriptionError && (
+                    <span className="text-red-500 text-xs font-semibold">
+                      {descriptionError}
+                    </span>
+                  )}
                 </form>
               </ModalBody>
               <ModalFooter>
